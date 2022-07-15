@@ -1,0 +1,26 @@
+---
+version: '3.4'
+services:
+  # back-end api built with golang
+  golang:
+    build:
+      context: server
+      dockerfile: server.Dockerfile
+      target: dev
+    volumes:
+      - ./server:/root
+    ports:
+      - 5000:5000
+    env_file: .env
+
+  # front end and middle stack with nextjs
+  next:
+    stdin_open: true
+    build:
+      context: client
+      dockerfile: client.Dockerfile
+      target: dev
+    volumes:
+      - ./client:/root
+    ports:
+      - 3000:3000
