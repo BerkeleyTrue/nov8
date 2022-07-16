@@ -1,14 +1,33 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"os"
+
+	"github.com/berkeleytrue/nov8/server/config"
+	"github.com/dn365/gin-zerolog"
+	"github.com/gin-gonic/gin"
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
+)
 
 func main() {
-	r := gin.Default()
+	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stdout})
+
+	cfg := config.NewConfig()
+
+	if cfg.Release == "production" {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
+	r := gin.New()
+	r.Use(ginzerolog.Logger("gin"))
+	r.Use(gin.Recovery())
+
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "hello world",
 		})
 	})
 
-  r.Run(":5000") // listen and serve on 0.0.0.0:8080
+	r.Run(":" + cfg.Port)
 }
