@@ -2,7 +2,7 @@
 version: '3.4'
 services:
   # back-end api built with golang
-  golang:
+  be:
     build:
       context: server
       dockerfile: server.Dockerfile
@@ -14,7 +14,7 @@ services:
     env_file: .env
 
   # front end and middle stack with nextjs
-  next:
+  fe:
     stdin_open: true
     build:
       context: client
