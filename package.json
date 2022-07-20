@@ -1,0 +1,28 @@
+{
+  "name": "nov8",
+  "version": "0.0.1",
+  "description": "",
+  "main": ".",
+  "scripts": {
+    "prepare": "node ./scripts/prepare.cjs",
+    "precommit": "lint-staged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BerkeleyTrue/nov8.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BerkeleyTrue/nov8/issues"
+  },
+  "homepage": "https://github.com/BerkeleyTrue/nov8#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "prettier-plugin-tailwindcss": "^0.1.12"
+  }
+}

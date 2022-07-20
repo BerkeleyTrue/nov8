@@ -1,0 +1,10 @@
+---
+'client/{src,scripts}/**/*.{ts,tsx}':
+  - eslint --fix --max-warnings=0
+  - prettier --write
+
+'**/*.yml':
+  - prettier --write --parser yaml
+
+'server/**/*.go':
+  - gofmt -w
