@@ -1,8 +1,8 @@
 ---
+parser: '@typescript-eslint/parser'
 extends:
   - plugin:solid/typescript
   - plugin:import/recommended
-  - plugin:react-hooks/recommended
 plugins:
   - import
   - solid
