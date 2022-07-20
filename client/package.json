@@ -16,6 +16,7 @@
     "eslint-plugin-solid": "^0.7.1",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
+    "prettier-plugin-tailwindcss": "^0.1.12",
     "tailwind-dracula": "^1.1.0",
     "tailwindcss": "^3.1.6",
     "ts-node": "^10.9.1",
