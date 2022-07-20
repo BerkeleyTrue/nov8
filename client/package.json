@@ -24,7 +24,11 @@
     "vite-plugin-solid": "^2.3.0"
   },
   "dependencies": {
+    "redux": "^4.2.0",
+    "redux-router5": "^8.0.1",
+    "redux-vertical": "^2.1.0",
     "remeda": "^0.0.35",
+    "router5": "^8.0.1",
     "solid-js": "^1.4.7"
   }
 }
