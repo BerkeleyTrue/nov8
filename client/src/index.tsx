@@ -11,6 +11,7 @@ import { MetaProvider } from 'solid-meta';
 const routes = [
   { name: 'home', path: '/' },
   { name: 'login', path: '/login' },
+  { name: 'signup', path: '/signup' },
 ];
 
 const router = createRouter({ routes });

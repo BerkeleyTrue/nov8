@@ -2,7 +2,7 @@ import { Component, Match, Switch } from 'solid-js';
 
 import { Home } from './pages/Home';
 import { MainLayout } from './Layout/MainLayout';
-import { Login } from './pages/Login';
+import { Auth } from './pages/Auth';
 import { createRoute } from './lib/router5/createRoute';
 
 const App: Component = () => {
@@ -16,7 +16,10 @@ const App: Component = () => {
           <Home />
         </Match>
         <Match when={match('login')}>
-          <Login />
+          <Auth />
+        </Match>
+        <Match when={match('signup')}>
+          <Auth />
         </Match>
       </Switch>
     </MainLayout>

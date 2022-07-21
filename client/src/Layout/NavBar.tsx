@@ -23,7 +23,7 @@ export const NavBar: Component = () => {
             class='text-light'
           >
             <button class='bg-darker-600 hover:bg-darker-700 h-full px-6 uppercase'>
-              Sign In
+              Login
             </button>
           </RLink>
         </div>
