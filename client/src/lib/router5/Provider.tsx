@@ -1,6 +1,6 @@
 import { Router } from 'router5';
 import { Component, createEffect, JSXElement, onCleanup } from 'solid-js';
-import { createStore } from 'solid-js/store';
+import { createStore, reconcile } from 'solid-js/store';
 
 import { RouteContext, RouterContext } from './Context';
 import { IRouteState, UnsubscribeFn } from './types';
@@ -21,7 +21,9 @@ export const RouterProvider: Component<Props> = (props) => {
 
   createEffect(() => {
     const subscription = props.router.subscribe(({ route, previousRoute }) => {
-      setRouteState({ route, previousRoute });
+      setRouteState(
+        reconcile<IRouteState, IRouteState>({ route, previousRoute }),
+      );
     }) as UnsubscribeFn;
 
     onCleanup(() => subscription && subscription());

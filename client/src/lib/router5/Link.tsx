@@ -1,8 +1,9 @@
 import * as R from 'remeda';
 import { NavigationOptions, State } from 'router5';
-import { JSX, ParentComponent, splitProps } from 'solid-js';
+import { createMemo, JSX, ParentComponent, splitProps } from 'solid-js';
 import { join } from '../remeda/join';
 import { split } from '../remeda/split';
+import { createIsActive } from './createIsActive';
 import { useRouter } from './useRouter';
 
 export interface RLinkProps
@@ -37,15 +38,17 @@ export const RLink: ParentComponent<RLinkProps> = (props) => {
     'successCallback',
     'errorCallback',
   ]);
+
+  const [link] = splitProps(props, [
+    'routeName',
+    'routeParams',
+    'ignoreQueryParams',
+    'activeStrict',
+  ]);
+
   const router = useRouter();
 
-  const isActive = () =>
-    router.isActive(
-      local.routeName,
-      local.routeParams,
-      local.activeStrict,
-      local.ignoreQueryParams,
-    );
+  const isActive = createIsActive(() => link);
 
   const onClickCallback = (err: any, state: State) => {
     if (!err && local.successCallback) {
@@ -80,14 +83,14 @@ export const RLink: ParentComponent<RLinkProps> = (props) => {
     }
   };
 
-  const className = () => {
+  const className = createMemo(() => {
     return R.pipe(
-      isActive ? local.activeClass : '',
+      isActive() ? local.activeClass : '',
       split(' '),
       R.concat(split(local.class, ' ')),
       join(' '),
     );
-  };
+  });
 
   const href = () =>
     router.buildUrl
