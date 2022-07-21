@@ -8,7 +8,7 @@ export const NavBar: Component = () => {
         <div class='h-full items-center'>
           <RLink
             routeName='home'
-            activeClass='text-light-400'
+            activeClass='!text-light-400'
             class='text-light '
           >
             <button class='bg-darker-600 hover:bg-darker-700 h-full px-6 text-2xl leading-10 tracking-widest'>
@@ -19,7 +19,7 @@ export const NavBar: Component = () => {
         <div class='h-full items-center'>
           <RLink
             routeName='login'
-            activeClass='text-light-400'
+            activeClass='!text-light-400'
             class='text-light'
           >
             <button class='bg-darker-600 hover:bg-darker-700 h-full px-6 uppercase'>
