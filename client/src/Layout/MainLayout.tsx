@@ -12,7 +12,7 @@ export const MainLayout: Component<Props> = (props) => {
       <div
         class={`h-[calc(100vh-theme('spacing.14'))] max-h-screen w-full flex-grow overflow-y-auto overflow-x-hidden px-4`}
       >
-        <div class='mx-auto min-h-full w-full max-w-screen-xl pt-4 md:pt-16'>
+        <div class='mx-auto h-full min-h-full w-full max-w-screen-xl pt-4 md:pt-16'>
           {props.children}
         </div>
       </div>
