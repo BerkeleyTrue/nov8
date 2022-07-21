@@ -1,7 +1,27 @@
 /* @refresh reload */
-import './index.css';
 import { render } from 'solid-js/web';
 
-import App from './App';
+import './index.css';
+import { RouterProvider } from './lib/router5';
+import { createRouter } from './infra/router5';
 
-render(() => <App />, document.getElementById('root') as HTMLElement);
+import App from './App';
+import { MetaProvider } from 'solid-meta';
+
+const routes = [
+  { name: 'home', path: '/' },
+  { name: 'login', path: '/login' },
+];
+
+const router = createRouter({ routes });
+
+render(
+  () => (
+    <RouterProvider router={router}>
+      <MetaProvider>
+        <App />
+      </MetaProvider>
+    </RouterProvider>
+  ),
+  document.getElementById('root') as HTMLElement,
+);

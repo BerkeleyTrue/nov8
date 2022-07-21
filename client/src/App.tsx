@@ -1,28 +1,25 @@
-import { Component } from 'solid-js';
-import { MetaProvider } from 'solid-meta';
+import { Component, Match, Switch } from 'solid-js';
 
-import { AppTitle } from './components/AppTitle';
-import { createRouter } from './infra/router5';
+import { Home } from './pages/Home';
 import { MainLayout } from './Layout/MainLayout';
-import { RouterProvider } from './lib/router5';
-
-const routes = [
-  { name: 'home', path: '/' },
-  { name: 'login', path: '/login' },
-];
-
-const router = createRouter({ routes });
+import { Login } from './pages/Login';
+import { createRoute } from './lib/router5/createRoute';
 
 const App: Component = () => {
+  const useRoute = createRoute();
+  const match = (name: string) => useRoute()?.route?.name == name;
+
   return (
-    <RouterProvider router={router}>
-      <MetaProvider>
-        <MainLayout>
-          <AppTitle subTitle='home' />
-          <p class='py-20 text-center text-4xl text-green-700'>Nov8 client</p>
-        </MainLayout>
-      </MetaProvider>
-    </RouterProvider>
+    <MainLayout>
+      <Switch>
+        <Match when={match('home')}>
+          <Home />
+        </Match>
+        <Match when={match('login')}>
+          <Login />
+        </Match>
+      </Switch>
+    </MainLayout>
   );
 };
 
