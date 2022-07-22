@@ -5,7 +5,8 @@
   "main": ".",
   "scripts": {
     "prepare": "node ./scripts/prepare.cjs",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "start": "docker-compose up"
   },
   "repository": {
     "type": "git",
