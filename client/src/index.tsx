@@ -12,6 +12,7 @@ const routes = [
   { name: 'home', path: '/' },
   { name: 'login', path: '/login' },
   { name: 'signup', path: '/signup' },
+  { name: 'game', path: '/game' },
 ];
 
 const router = createRouter({ routes });

@@ -1,13 +1,18 @@
 import { Component } from 'solid-js';
 import { Button } from '../../components/Button';
+import { RLink } from '../../lib/router5/Link';
 
 export const Home: Component = () => {
   return (
     <div class='Home flex min-h-full flex-col justify-between'>
       <main>
         <section class='mb-4 flex flex-col items-center justify-between space-y-2'>
-          <Button class='w-full'>play with friends</Button>
-          <Button class='w-full'>play with the computer</Button>
+          <RLink routeName='game' class='w-full'>
+            <Button class='w-full'>play with friends</Button>
+          </RLink>
+          <RLink routeName='game' class='w-full'>
+            <Button class='w-full'>play with the computer</Button>
+          </RLink>
         </section>
         <section class='mb-4 flex w-full justify-between rounded-md bg-gradient-to-bl from-purple-100 to-slate-500 px-4 py-1'>
           <dl>
