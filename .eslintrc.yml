@@ -18,7 +18,7 @@ settings:
     - .ts
     - .tsx
 rules:
-  import/no-unresolved: 2
+  import/no-unresolved: 0 # turning off for now. Can't resolve types
   import/named: 2
   import/namespace: 2
   import/default: 2
