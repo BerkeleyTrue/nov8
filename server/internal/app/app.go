@@ -7,7 +7,7 @@ import (
 	"syscall"
 
 	"github.com/berkeleytrue/nov8/server/config"
-	driver "github.com/berkeleytrue/nov8/server/internal/drivers"
+	"github.com/berkeleytrue/nov8/server/internal/drivers"
 	"github.com/berkeleytrue/nov8/server/internal/infra"
 	"github.com/rs/zerolog/log"
 )
