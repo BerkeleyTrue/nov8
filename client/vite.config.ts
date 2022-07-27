@@ -16,10 +16,6 @@ export default defineConfig({
         target: apiUrl,
         changeOrigin: true,
       },
-      '/wasm': {
-        target: apiUrl,
-        changeOrigin: true,
-      }
     },
   },
   build: {
