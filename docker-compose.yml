@@ -1,5 +1,6 @@
 ---
 version: '3.4'
+
 services:
   # back-end api built with golang
   be:
@@ -24,4 +25,6 @@ services:
       - ./client:/root
     ports:
       - 3000:3000
+    environment:
+      API_HOST: be
     env_file: .env
