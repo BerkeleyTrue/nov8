@@ -1,25 +1,46 @@
-import { Application, Container, Sprite, Texture } from 'pixi.js';
-import { createEffect, ParentComponent } from 'solid-js';
+import { Application } from 'pixi.js';
+import { createEffect, onCleanup, ParentComponent } from 'solid-js';
+import { PixiProvider } from './Provider';
 
-export interface Props {}
+export interface StageProps {
+  id?: string;
+  class?: string;
+  height?: string;
+  width?: string;
+}
 
-export const Stage: ParentComponent<Props> = () => {
-  let ref: HTMLCanvasElement;
+export const Stage: ParentComponent<StageProps> = (props) => {
+  let app: Application | undefined;
+  let canvasRef: HTMLCanvasElement = (
+    <canvas style={{ height: '100%', width: '100%' }} />
+  ) as any as HTMLCanvasElement;
+
+  let containerRef: HTMLDivElement = (
+    <div
+      id={props.id}
+      class={props.class}
+      style={{ height: props.height, width: props.width }}
+    >
+      {canvasRef}
+    </div>
+  ) as any as HTMLDivElement;
+
   createEffect(() => {
-    const container = new Container();
-    let app = new Application({
+    app = new Application({
       width: 800,
       height: 600,
       resolution: window.devicePixelRatio || 1,
-      view: ref,
+      view: canvasRef,
     });
-    app.stage.addChild(container);
 
-    const texture = Texture.from(
-      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/693612/IaUrttj.png',
-    );
-    const sprite = new Sprite(texture);
-    container.addChild(sprite);
+    onCleanup(() => {
+      app.destroy();
+    });
   });
-  return <canvas ref={ref} />;
+
+  createEffect(() => {
+    <PixiProvider app={app}>{props.children}</PixiProvider>;
+  });
+
+  return containerRef;
 };
