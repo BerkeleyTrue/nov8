@@ -18,6 +18,7 @@ func CreateGinHandler(cfg *config.Config) *gin.Engine {
 	}
 
 	handler.Use(gin.Recovery())
+	handler.Static("/wasm", "./static/wasm")
 
 	return handler
 }
