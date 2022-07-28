@@ -10,6 +10,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.0.6",
+    "@types/uuid": "^8.3.2",
     "autoprefixer": "^10.4.7",
     "postcss": "^8.4.14",
     "tailwind-dracula": "^1.1.0",
@@ -26,6 +27,7 @@
     "router5": "^8.0.1",
     "router5-plugin-browser": "^8.0.1",
     "solid-js": "^1.4.7",
-    "solid-meta": "^0.27.5"
+    "solid-meta": "^0.27.5",
+    "uuid": "^8.3.2"
   }
 }

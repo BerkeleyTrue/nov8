@@ -4,26 +4,25 @@ import "github.com/google/uuid"
 
 // Five styles of tech
 type Icon struct {
-	Id    int8
-	Name  string // Castle, Leave, Factory, Crown, Bulb
-	Color string //  black, green, red, gold, purple
+	Id   int8   `json:"id"`
+	Name string `json:"name"` // Castle, Leave, Factory, Crown, Bulb
 }
 
 // Effects from a Tech used as an action
 type Dogma struct {
-	Id     int32
-	Name   string
-	TechId int32 // which card does this belong to
-	IconId int32 // which Icon does this share with
+	Id     int32  `json:"id"`
+	Name   string `json:"name"`
+	TechId int32  `json:"techId"` // which card does this belong to
+	IconId int32  `json:"iconId"` // which Icon does this share with
 }
 
 // A card that enables a technology for a player
 type Tech struct {
-	Id     int32
-	Name   string
-	Age    int8 // which age does this card appear
-	IconId int8 // which color/icon is this tech tied too
-	Dogmas []int32
+	Id     int32   `json:"id"`
+	Name   string  `json:"name"`
+	Age    int8    `json:"age"`   // which age does this card appear
+	Color  string  `json:"color"` //  black, green, red, gold, purple
+	Dogmas []int32 `json:"dogmas"`
 }
 
 // A stack of 0 or more Techs of the same type melded to your Tableau
@@ -38,16 +37,16 @@ type Tableau struct {
 }
 
 type Player struct {
-	Id           uuid.UUID
-	Name         string
-	Achievements int8
+	Id           uuid.UUID `json:"id"`
+	Name         string    `json:"name"`
+	Achievements int8      `json:"achievements"`
 }
 
 type Game struct {
-	Stage         int8
-	Turn          int32
-	CurrentPlayer uuid.UUID
-	Players       []uuid.UUID
+	Stage         int8        `json:"stage"`
+	Turn          int32       `json:"turn"`
+	CurrentPlayer uuid.UUID   `json:"currentPlayer"`
+	Players       []uuid.UUID `json:"players"`
 }
 
 func CreateNewPlayer(name string) *Player {
