@@ -1,7 +1,7 @@
 import { Application } from 'pixi.js';
 import { createContext, ParentComponent, useContext } from 'solid-js';
 
-export const PixiContext = createContext<Application | undefined>();
+export const PixiContext = createContext<Application | void>();
 
 export const PixiProvider: ParentComponent<{ app: Application }> = (props) => {
   return (
