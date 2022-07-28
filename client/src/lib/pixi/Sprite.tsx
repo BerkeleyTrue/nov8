@@ -1,5 +1,10 @@
 import { createEffect, ParentComponent } from 'solid-js';
-import { BaseTexture, Texture, Sprite as PixiSprite } from 'pixi.js';
+import {
+  BaseTexture,
+  Texture,
+  Sprite as PixiSprite,
+  Application,
+} from 'pixi.js';
 import { usePixiApp } from './Provider';
 
 interface SpriteProps {
@@ -17,6 +22,9 @@ export const Sprite: ParentComponent<SpriteProps> = (props) => {
   const app = usePixiApp();
 
   createEffect(() => {
+    if (!(app instanceof Application)) {
+      return;
+    }
     const res = props.image || props.video || props.source;
     const texture = Texture.from(res);
     const sprite = new PixiSprite(texture);
