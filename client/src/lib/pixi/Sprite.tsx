@@ -1,13 +1,9 @@
 import { createEffect, onCleanup, ParentComponent, splitProps } from 'solid-js';
-import {
-  BaseTexture,
-  Texture,
-  Sprite as PixiSprite,
-  Application,
-} from 'pixi.js';
-import { usePixiApp } from './Provider';
+import { BaseTexture, Texture, Sprite as PixiSprite } from 'pixi.js';
+import { usePixiStage } from './Provider';
+import { applyProps, PointProp } from './utils/props';
 
-interface SpriteProps extends Partial<PixiSprite> {
+interface SpriteProps extends Partial<Omit<PixiSprite, 'anchor'>> {
   image?: HTMLImageElement | string;
   video?: HTMLVideoElement | string;
   source?:
@@ -16,33 +12,39 @@ interface SpriteProps extends Partial<PixiSprite> {
     | HTMLCanvasElement
     | BaseTexture
     | string;
+  anchor?: PointProp;
 }
 
 export const Sprite: ParentComponent<SpriteProps> = (props) => {
   let sprite: PixiSprite | undefined;
-  const app = usePixiApp();
   const [local, pixiProps] = splitProps(props, ['image', 'video', 'source']);
 
+  // instantiate sprite
   createEffect(() => {
-    if (!(app instanceof Application)) {
+    const stage = usePixiStage();
+    if (!stage) {
       return;
     }
     const res = local.image || local.video || local.source;
     const texture = Texture.from(res);
     sprite = new PixiSprite(texture);
-    app.stage.addChild(sprite);
+    stage.addChild(sprite);
 
     onCleanup(() => {
-      app.stage.removeChild(sprite);
+      if (stage) {
+        stage.removeChild(sprite);
+      }
       sprite.destroy();
     });
   });
 
-  createEffect(() => {
+  // update props
+  createEffect((prev) => {
     if (!sprite) {
       return;
     }
-    Object.assign(sprite, pixiProps);
+    applyProps(sprite, prev, pixiProps);
+    return { ...pixiProps };
   });
 
   return undefined;

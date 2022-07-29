@@ -23,10 +23,9 @@ export const Stage: ParentComponent<StageProps> = (props) => {
   createEffect(() => {
     app = new Application({
       ...options,
-      width: 800,
-      height: 600,
       resolution: window.devicePixelRatio || 1,
       view: canvasRef,
+      resizeTo: containerRef,
     });
 
     onCleanup(() => {

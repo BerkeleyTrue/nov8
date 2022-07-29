@@ -11,7 +11,9 @@ export const useTick = <T = any>(callback: TickerCallback<T>) => {
     app.ticker.add(callback);
 
     onCleanup(() => {
-      app.ticker.remove(callback);
+      if (app.ticker) {
+        app.ticker.remove(callback);
+      }
     });
   });
 };
