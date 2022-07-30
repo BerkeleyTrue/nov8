@@ -2,23 +2,23 @@
   "icons": [
     {
       "id": 1,
-      "name": "stronghold"
+      "name": "rook"
     },
     {
       "id": 2,
-      "name": "environment"
+      "name": "leaf"
     },
     {
       "id": 3,
-      "name": "industry"
+      "name": "factory"
     },
     {
       "id": 4,
-      "name": "royalty"
+      "name": "crown"
     },
     {
       "id": 5,
-      "name": "enginuity"
+      "name": "bulb"
     }
   ],
   "tecks": [
