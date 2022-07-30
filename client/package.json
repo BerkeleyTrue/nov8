@@ -21,7 +21,6 @@
     "vite-plugin-solid": "^2.3.0"
   },
   "dependencies": {
-    "pixi.js": "^6.5.1",
     "redux-router5": "^8.0.1",
     "remeda": "^0.0.35",
     "router5": "^8.0.1",

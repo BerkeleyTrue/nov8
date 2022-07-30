@@ -1,6 +1,7 @@
 import data from './data.json';
 import { v4 as uuid } from 'uuid';
 
+export type IconTypes = 'rook' | 'leaf' | 'works' | 'crown' | 'bulb';
 export type UUID = string;
 
 export interface IPlayer {

@@ -1,7 +1,8 @@
 import { ParentComponent } from 'solid-js';
+import { IconTypes } from '../../core/game/game';
 
 export interface IconProps {
-  icon: 'rook' | 'leaf' | 'factory' | 'crown' | 'bulb';
+  icon: IconTypes;
 }
 
 export const Icon: ParentComponent<IconProps> = (props) => {

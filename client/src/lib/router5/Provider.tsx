@@ -1,6 +1,6 @@
 import { Router, SubscribeFn } from 'router5';
 import { Component, createEffect, JSXElement, onCleanup } from 'solid-js';
-import { createStore } from 'solid-js/store';
+import { createStore, reconcile } from 'solid-js/store';
 
 import { RouteContext, RouterContext } from './Context';
 import { IRouteState, UnsubscribeFn } from './types';
@@ -16,13 +16,17 @@ export const RouterProvider: Component<Props> = (props) => {
 
   const [routeState, setRouteState] = createStore<IRouteState>({
     route,
-    previousRoute: null,
+    previousRoute: { name: 'n/a', params: [], path: '/' },
   });
 
   createEffect(() => {
     const listener: SubscribeFn = (subscriptionState) => {
-      setRouteState('previousRoute', subscriptionState.previousRoute);
-      setRouteState('route', subscriptionState.route);
+      setRouteState(
+        reconcile({
+          route: subscriptionState.route,
+          previousRoute: subscriptionState.previousRoute,
+        }),
+      );
     };
 
     const subscription = props.router.subscribe(listener) as UnsubscribeFn;
