@@ -10,7 +10,7 @@ WORKDIR /root/
 RUN echo $DATABASE_URL
 RUN echo "getting latest npm modules" \
     && npm ci \
-RUN echo "installation complete, generating client" \
+RUN echo "installation complete, init" \
     && npx prisma migrate dev --name init
 
 FROM node:16-alpine as prod
