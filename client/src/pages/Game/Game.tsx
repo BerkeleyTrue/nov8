@@ -1,10 +1,10 @@
-import { ParentComponent } from 'solid-js';
+import { FunctionComponent, PropsWithChildren } from 'react';
 
-export const Game: ParentComponent = () => {
+export const Game: FunctionComponent<PropsWithChildren<{}>> = () => {
   return (
-    <div class='game-layout h-full w-full'>
-      <main class='game-entry h-full w-full'>
-        <div id='game-container' class='aspect-video w-full'>
+    <div className='game-layout h-full w-full'>
+      <main className='game-entry h-full w-full'>
+        <div id='game-container' className='aspect-video w-full'>
           Game
         </div>
       </main>
