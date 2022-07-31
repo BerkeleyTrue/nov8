@@ -2,6 +2,10 @@
 version: '3.4'
 
 services:
+  db:
+    image: postgres
+    env_file: .env
+
   # back-end api built with golang
   be:
     build:

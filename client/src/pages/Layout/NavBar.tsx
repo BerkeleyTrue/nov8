@@ -13,7 +13,7 @@ export const NavBar: FunctionComponent<PropsWithChildren> = () => {
           </AppLink>
         </div>
         <div className='h-full items-center'>
-          <AppLink href='/login'>
+          <AppLink href='/auth/login'>
             <button className='text-light bg-darker-600 hover:bg-darker-700 h-full px-6 uppercase'>
               Login
             </button>
