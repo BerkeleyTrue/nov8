@@ -1,0 +1,19 @@
+---
+version: '3.4'
+
+services:
+  db:
+    image: postgres
+    env_file: .env
+
+  prisma-migrate:
+    stdin_open: true
+    build:
+      context: client
+      dockerfile: client.Dockerfile
+      target: migrate
+    volumes:
+      - ./client:/root
+    env_file: .env
+    depends_on:
+      - db
