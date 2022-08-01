@@ -42,18 +42,21 @@ export interface CreateGameOptions {
   numOfPlayers: number;
 }
 
-export const createPlayer = (name: string): IPlayer => {
+export const createPlayer = (
+  id: string = uuid(),
+  name: string = 'Anon',
+): IPlayer => {
   return {
-    id: uuid(),
+    id: id,
     name,
   };
 };
 
-export const createGame = (): IGame => {
+export const createGame = (player: IPlayer): IGame => {
   return {
     id: uuid(),
     currentPlayer: '',
-    players: [],
+    players: [player.id],
     tecks: data.tecks,
     icons: data.icons,
   };
