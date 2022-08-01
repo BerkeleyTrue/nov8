@@ -1,4 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next';
+import { unstable_getServerSession } from 'next-auth';
 import { BuiltInProviderType } from 'next-auth/providers';
 import {
   ClientSafeProvider,
@@ -10,12 +11,27 @@ import { FunctionComponent, useCallback, useState } from 'react';
 import { VscGithubInverted } from 'react-icons/vsc';
 
 import { Button } from '../../components/Button';
+import { authOptions } from '../api/auth/[...nextauth].api';
 
 export interface Props {
   providers: ClientSafeProvider[];
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context,
+) => {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions,
+  );
+
+  if (session) {
+    return {
+      redirect: { permanent: false, destination: '/?showAuthToast=true' },
+    };
+  }
+
   const providers =
     (await getProviders()) ||
     ({} as Record<
