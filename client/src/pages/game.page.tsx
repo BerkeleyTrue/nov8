@@ -1,6 +1,6 @@
-import { FunctionComponent, PropsWithChildren } from 'react';
+import { NextPage } from 'next';
 
-export const Game: FunctionComponent<PropsWithChildren<{}>> = () => {
+const GamePage: NextPage = () => {
   return (
     <div className='game-layout h-full w-full'>
       <main className='game-entry h-full w-full'>
@@ -11,3 +11,5 @@ export const Game: FunctionComponent<PropsWithChildren<{}>> = () => {
     </div>
   );
 };
+
+export default GamePage;
