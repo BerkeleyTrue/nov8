@@ -4,8 +4,9 @@ import { AppLink } from '../../components/Links';
 
 const handleSignOut = () => signOut();
 export const NavBar: FunctionComponent<PropsWithChildren> = () => {
-  const { status } = useSession();
+  const { status, data } = useSession();
   const isSignedIn = status === 'unauthenticated' ? false : true;
+  const name = data?.user?.name ?? 'anon';
 
   return (
     <div className='bg-darker-600 h-14 w-full'>
@@ -17,14 +18,19 @@ export const NavBar: FunctionComponent<PropsWithChildren> = () => {
             </button>
           </AppLink>
         </div>
-        <div className='h-full items-center'>
+        <div className='flex h-full items-center'>
           {isSignedIn ? (
-            <button
-              className='text-light bg-darker-600 hover:bg-darker-700 h-full px-6 uppercase'
-              onClick={handleSignOut}
-            >
-              Log out
-            </button>
+            <>
+              <div className='text-light bg-darker-600 hover:bg-darker-700 flex h-full items-center justify-center px-6 text-sm uppercase leading-tight'>
+                {name}
+              </div>
+              <button
+                className='text-light bg-darker-600 hover:bg-darker-700 h-full px-6 uppercase'
+                onClick={handleSignOut}
+              >
+                Log out
+              </button>
+            </>
           ) : (
             <AppLink href='/auth/login'>
               <button className='text-light bg-darker-600 hover:bg-darker-700 h-full px-6 uppercase'>
