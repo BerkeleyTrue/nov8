@@ -6,7 +6,8 @@
   "scripts": {
     "prepare": "node ./scripts/prepare.cjs",
     "precommit": "lint-staged",
-    "start": "docker-compose up"
+    "start": "docker-compose up",
+    "migrate": "docker-compose -f docker-compose.migrate.yml up "
   },
   "repository": {
     "type": "git",

@@ -1,16 +1,15 @@
 FROM node:16-alpine as dev
 WORKDIR /root/
-CMD echo "getting latest npm modules" \
+CMD echo -e "\n\n=>>***----***\n=>>Dev: Getting latest npm modules\n=>>***----***\n\n" \
     && npm ci \
-    && echo "installation complete, starting" \
+    && echo -e "\n\n=>>***----***\n=>>Installation complete, starting dev servers \n=>>***----*** \n\n" \
     && npm start
 
 FROM node:16-alpine as migrate
-WORKDIR /root/
-RUN echo $DATABASE_URL
-RUN echo "getting latest npm modules" \
-    && npm ci \
-RUN echo "installation complete, init" \
+WORKDIR /root
+CMD echo -e '\n\n/=>>***----*** /\n=>>Migrate: Getting latest npm modules\n=>>***----*** \n\n' \
+    && npm ci --cache .npm\
+    && echo -e '\n\n/=>>***----*** /\n=>>Installation complete, starting migrations.\n/ ***----*** /\n\n' \
     && npx prisma migrate dev --name init
 
 FROM node:16-alpine as prod

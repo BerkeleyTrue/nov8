@@ -3,10 +3,12 @@ version: '3.4'
 
 services:
   db:
+    container_name: nov8_db
     image: postgres
     env_file: .env
 
-  prisma-migrate:
+  migrate:
+    container_name: nov8_migrate
     stdin_open: true
     build:
       context: client
