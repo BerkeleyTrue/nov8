@@ -1,7 +1,12 @@
+import { signOut, useSession } from 'next-auth/react';
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { AppLink } from '../../components/Links';
 
+const handleSignOut = () => signOut();
 export const NavBar: FunctionComponent<PropsWithChildren> = () => {
+  const { status } = useSession();
+  const isSignedIn = status === 'unauthenticated' ? false : true;
+
   return (
     <div className='bg-darker-600 h-14 w-full'>
       <div className='flex h-full justify-between px-4 md:px-1'>
@@ -13,11 +18,20 @@ export const NavBar: FunctionComponent<PropsWithChildren> = () => {
           </AppLink>
         </div>
         <div className='h-full items-center'>
-          <AppLink href='/auth/login'>
-            <button className='text-light bg-darker-600 hover:bg-darker-700 h-full px-6 uppercase'>
-              Login
+          {isSignedIn ? (
+            <button
+              className='text-light bg-darker-600 hover:bg-darker-700 h-full px-6 uppercase'
+              onClick={handleSignOut}
+            >
+              Log out
             </button>
-          </AppLink>
+          ) : (
+            <AppLink href='/auth/login'>
+              <button className='text-light bg-darker-600 hover:bg-darker-700 h-full px-6 uppercase'>
+                Login
+              </button>
+            </AppLink>
+          )}
         </div>
       </div>
     </div>
