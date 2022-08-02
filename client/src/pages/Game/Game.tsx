@@ -1,8 +1,9 @@
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
-import { createGame, createPlayer, IGame } from '../../core/game/game';
+import { createGame, createPlayer } from '../../core/game/game';
 import { useLocalStorage } from '../../lib/react/hooks';
+import { IGame } from '../../types/nov8';
 import { ParentComponent } from '../../types/react';
 
 declare global {
@@ -38,6 +39,7 @@ export const Game: ParentComponent = () => {
         <div id='game-container' className='aspect-video w-full'>
           Game {game?.id ?? 'loading...'}
         </div>
+        <div>hand</div>
       </main>
     </div>
   );
