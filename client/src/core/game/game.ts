@@ -1,5 +1,6 @@
 import data from './data.json';
 import { v4 as uuid } from 'uuid';
+import { Reducer } from 'react';
 
 export type IconTypes = 'rook' | 'leaf' | 'works' | 'crown' | 'bulb';
 export type UUID = string;
@@ -60,4 +61,8 @@ export const createGame = (player: IPlayer): IGame => {
     tecks: data.tecks,
     icons: data.icons,
   };
+};
+
+export const gameReducer: Reducer<IGame, any> = (game) => {
+  return game;
 };

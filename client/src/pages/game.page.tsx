@@ -1,20 +1,15 @@
 import { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
-import { createGame, createPlayer } from '../core/game/game';
+import { Suspense } from 'react';
+import { DynamicGame } from './Game';
 
 const GamePage: NextPage = () => {
-  const { data } = useSession();
-  const player = createPlayer(
-    data?.user?.id ?? undefined,
-    data?.user?.name ?? undefined,
-  );
-  const game = createGame(player);
-
   return (
     <div className='game-layout h-full w-full'>
       <main className='game-entry h-full w-full'>
         <div id='game-container' className='aspect-video w-full'>
-          Game {game.id}
+          <Suspense fallback={<div>Loading...</div>}>
+            <DynamicGame />
+          </Suspense>
         </div>
       </main>
     </div>
