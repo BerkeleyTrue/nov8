@@ -1,11 +1,13 @@
 import { v4 as uuid } from 'uuid';
-import { Reducer } from 'react';
+import create from 'zustand';
+
 import { IconTypesMap, IGame, IPlayer } from '../../types/nov8';
 
-export interface CreateGameOptions {
-  playerId: string;
-  playerName: string;
-  numOfPlayers: number;
+interface IGameState {
+  players: IPlayer[];
+  game: IGame | void;
+  createGame: (player: IPlayer) => void;
+  createPlayer: (id: string, name: string) => void;
 }
 
 export const createPlayer = (
@@ -28,6 +30,16 @@ export const createGame = (player: IPlayer): IGame => {
   };
 };
 
-export const gameReducer: Reducer<IGame, any> = (game) => {
-  return game;
-};
+export const useStore = create<IGameState>((set) => ({
+  players: [],
+  game: undefined,
+  createPlayer: (id = uuid(), name) => {
+    set((state) => ({
+      ...state,
+      players: [...state.players, createPlayer(id, name)],
+    }));
+  },
+  createGame: (player: IPlayer) => {
+    set(() => ({ game: createGame(player) }));
+  },
+}));
