@@ -1,13 +1,16 @@
 import { v4 as uuid } from 'uuid';
 import create from 'zustand';
+import { immer } from 'zustand/middleware/immer';
+import { persist, devtools } from 'zustand/middleware';
 
 import { IconTypesMap, IGame, IPlayer } from '../../types/nov8';
 
 interface IGameState {
-  players: IPlayer[];
+  player: IPlayer | void;
   game: IGame | void;
   createGame: (player: IPlayer) => void;
-  createPlayer: (id: string, name: string) => void;
+  createPlayer: (id?: string, name?: string) => void;
+  resetGame: () => void;
 }
 
 export const createPlayer = (
@@ -30,16 +33,30 @@ export const createGame = (player: IPlayer): IGame => {
   };
 };
 
-export const useStore = create<IGameState>((set) => ({
-  players: [],
-  game: undefined,
-  createPlayer: (id = uuid(), name) => {
-    set((state) => ({
-      ...state,
-      players: [...state.players, createPlayer(id, name)],
-    }));
-  },
-  createGame: (player: IPlayer) => {
-    set(() => ({ game: createGame(player) }));
-  },
-}));
+export const useGameStore = create<IGameState>()(
+  devtools(
+    persist(
+      immer((set) => ({
+        player: undefined,
+        game: undefined,
+        createPlayer: (id = uuid(), name) => {
+          set((state) => {
+            state.player = createPlayer(id, name);
+          });
+        },
+        createGame: (player: IPlayer) => {
+          set(() => ({ game: createGame(player) }));
+        },
+        resetGame: () => {
+          set((state) => {
+            if (!state.game || !state.player) {
+              return (state.game = undefined);
+            }
+            state.game = createGame(state.player);
+          });
+        },
+      })),
+      { name: 'game' },
+    ),
+  ),
+);
