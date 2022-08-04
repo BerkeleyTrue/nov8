@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 import { useGameStore } from '../../core/game/game';
 import { ParentComponent } from '../../types/react';
+import { Tableau } from './Tableau';
 
 declare global {
   interface Window {
@@ -40,9 +41,12 @@ export const Game: ParentComponent = () => {
     <div className='game-layout h-full w-full'>
       <main className='game-entry h-full w-full'>
         <div id='game-container' className='aspect-video w-full'>
-          Game {gameState?.game?.id ?? 'loading...'}
+          Game {gameState?.ctx?.started ? 'Playing!' : 'loading...'}
         </div>
         <div>hand</div>
+        <div>
+          <Tableau />
+        </div>
       </main>
     </div>
   );

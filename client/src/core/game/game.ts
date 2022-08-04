@@ -3,14 +3,20 @@ import create from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { persist, devtools } from 'zustand/middleware';
 
-import { IconTypesMap, IGame, IPlayer } from '../../types/nov8';
+import { icons, IGame, IPlayer } from '../../types/nov8';
 
 interface IGameState {
   player: IPlayer | void;
   game: IGame | void;
+  ctx: {
+    started: boolean;
+    turn: number;
+    turnPlayer: IPlayer | void;
+  };
   createGame: (player: IPlayer) => void;
   createPlayer: (id?: string, name?: string) => void;
   resetGame: () => void;
+  start: () => void;
 }
 
 export const createPlayer = (
@@ -23,36 +29,54 @@ export const createPlayer = (
   };
 };
 
-export const createGame = (player: IPlayer): IGame => {
+export const createGame = (): IGame => {
   return {
     id: uuid(),
-    currentPlayer: '',
-    players: [player.id],
     tecks: [],
-    icons: Object.values(IconTypesMap),
+    icons: Object.values(icons),
+    age: 1,
   };
 };
 
 export const useGameStore = create<IGameState>()(
   devtools(
     persist(
-      immer((set) => ({
+      immer((set, get) => ({
         player: undefined,
         game: undefined,
+        ctx: {
+          started: false,
+          turn: 0,
+          turnPlayer: undefined,
+        },
         createPlayer: (id = uuid(), name) => {
           set((state) => {
             state.player = createPlayer(id, name);
           });
         },
-        createGame: (player: IPlayer) => {
-          set(() => ({ game: createGame(player) }));
+        createGame: () => {
+          set(() => ({ game: createGame() }));
         },
         resetGame: () => {
           set((state) => {
             if (!state.game || !state.player) {
               return (state.game = undefined);
             }
-            state.game = createGame(state.player);
+            state.game = createGame();
+            state.start();
+          });
+        },
+        start: () => {
+          const game = get().game;
+          if (!game) {
+            throw new Error('Game not created');
+          }
+          set((state) => {
+            state.ctx = {
+              started: true,
+              turn: 0,
+              turnPlayer: undefined,
+            };
           });
         },
       })),

@@ -1,47 +1,25 @@
 {
-  "icons": [
-    {
-      "id": 1,
-      "name": "rook"
-    },
-    {
-      "id": 2,
-      "name": "leaf"
-    },
-    {
-      "id": 3,
-      "name": "factory"
-    },
-    {
-      "id": 4,
-      "name": "crown"
-    },
-    {
-      "id": 5,
-      "name": "bulb"
-    }
-  ],
   "tecks": [
     {
       "id": 1,
       "name": "Tools",
       "color": "blue",
       "icons": [
-        0,
-        5,
-        5,
-        1
+        null,
+        "bulb",
+        "bulb",
+        "rook"
       ],
       "dogmas": [
         {
           "description": "You may return three cards from your hand. If you do, draw and meld a <age>3</age> card",
           "type": "may",
-          "icon": 5
+          "icon": "bulb"
         },
         {
           "description": "You may return a <age>3</age> card from your hand. If you do, draw and meld a 3 <age>1</age> cards",
           "type": "may",
-          "icon": 5
+          "icon": "bulb"
         }
       ]
     },
@@ -50,16 +28,16 @@
       "name": "code of laws",
       "color": "purple",
       "icons": [
-        0,
-        4,
-        4,
-        2
+        null,
+        "crown",
+        "crown",
+        "leaf"
       ],
       "dogmas": [
         {
           "description": "You may tuck a card from your hand of the same color as any card on your board. If you do, you may splay that color of your cards <splay>left</splay>",
           "type": "may",
-          "icon": 4
+          "icon": "crown"
         }
       ]
     },
@@ -68,16 +46,16 @@
       "name": "mysticism",
       "color": "purple",
       "icons": [
-        0,
-        1,
-        1,
-        1
+        null,
+        "rook",
+        "rook",
+        "rook"
       ],
       "dogmas": [
         {
           "description": "Draw and reveal a <age>1</age>. If it is the same color as any card on your board, meld it and draw a <age>1</age>",
           "type": "may",
-          "icon": 1
+          "icon": "rook"
         }
       ]
     },
@@ -86,16 +64,16 @@
       "name": "city states",
       "color": "purple",
       "icons": [
-        0,
-        4,
-        4,
-        1
+        null,
+        "crown",
+        "crown",
+        "rook"
       ],
       "dogmas": [
         {
           "description": "<demand /> you transfer a top card with a <icon>1</icon> from your board to my board if you have at least four <icon>1</icon> cards on your board! If you do, draw a <age>1</age>",
           "type": "demand",
-          "icon": 4
+          "icon": "rook"
         }
       ]
     }
