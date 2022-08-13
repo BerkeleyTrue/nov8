@@ -1,6 +1,7 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 
-import { IconTypes } from '../../core/game/game';
+import { IconComps } from './Icons';
+import { IconTypes } from '../../types/nov8';
 
 export interface IconProps {
   icon: IconTypes;
@@ -9,5 +10,6 @@ export interface IconProps {
 export const Icon: FunctionComponent<PropsWithChildren<IconProps>> = ({
   icon,
 }) => {
-  return <div>Icon{icon}</div>;
+  const Comp = IconComps[icon] || <div>Icon {icon}</div>;
+  return <Comp />;
 };
